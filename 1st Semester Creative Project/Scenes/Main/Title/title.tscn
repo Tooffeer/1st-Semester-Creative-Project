@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dyft3mxuxayyb"]
+[gd_scene load_steps=2 format=3 uid="uid://dyft3mxuxayyb"]
+
+[ext_resource type="Script" path="res://Scenes/Main/Title/title.gd" id="1_4tgk3"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4tgk3")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
