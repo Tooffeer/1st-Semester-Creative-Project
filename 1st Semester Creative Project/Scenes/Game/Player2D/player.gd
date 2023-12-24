@@ -1,46 +1,51 @@
 extends CharacterBody2D
 
-const SPEED = 45
+@export var runSpeed = 52.0
 
 # Jumping
-const JUMP_VELOCITY = -300
+@export var jumpHeight : float
+@export var jumpTimeToPeak : float
+@export var jumpTimeToDescent : float
+
+@onready var jumpVelocity : float = -((2.0 * jumpHeight) / jumpTimeToPeak)
+@onready var jumpGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToPeak, 2.0))
+@onready var fallGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToDescent, 2.0))
+
+# Coyote Jump variables
+var coyoteTime = 0.16
 var canJump : bool = true
-var coyote_timer = 0
-var coyoteTime = 0.18
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") / 2
+var coyoteTimer = 0.0
 
 
+# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Apply gravity.
+	# Apply gravity
 	if not is_on_floor():
-		velocity.y += gravity * delta
-	
-	# Determine coyote jump 
-	if is_on_floor():
+		velocity.y += getGravity() * delta
+		coyoteTimer += delta
+		if coyoteTimer > coyoteTime:
+			canJump = false
+	else:
+		coyoteTimer = 0.0
 		canJump = true
-		coyote_timer = 0
-	else:
-		coyote_timer += delta
-		if coyote_timer > coyoteTime:
-			canJump = false
 	
-	# Handle Jump.
 	if Input.is_action_just_pressed("jump"):
-		if canJump == true:
-			jump()
-			canJump = false
+		if canJump:
+			velocity.y = jumpVelocity
 	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Get player input direction
 	var direction = Input.get_axis("move_left", "move_right")
+	
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x = lerp(velocity.x, direction * runSpeed, delta * 12)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = lerp(velocity.x, 0.0, delta * 16)
+	
+	# Clamp fall velocity
+	if velocity.y > 180:
+		velocity.y = 180
 	
 	move_and_slide()
 
-func jump():
-	velocity.y = JUMP_VELOCITY
+func getGravity():
+	return jumpGravity if velocity.y < 0.0 else fallGravity
