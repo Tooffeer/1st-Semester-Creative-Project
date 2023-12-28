@@ -18,7 +18,7 @@ var coyoteTimer = 0.0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(delta): 
 	# Apply gravity
 	if not is_on_floor():
 		velocity.y += getGravity() * delta
@@ -29,12 +29,13 @@ func _physics_process(delta):
 		coyoteTimer = 0.0
 		canJump = true
 	
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_pressed("jump"):
 		if canJump:
 			velocity.y = jumpVelocity
+			canJump = false
 	
 	# Get player input direction
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction = Input.get_axis("left", "right")
 	
 	if direction:
 		velocity.x = lerp(velocity.x, direction * runSpeed, delta * 12)
