@@ -11,8 +11,8 @@ size = Vector2(8, 8)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
-jumpHeight = 20.0
-jumpTimeToPeak = 0.415
+jumpHeight = 21.265
+jumpTimeToPeak = 0.405
 jumpTimeToDescent = 0.265
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
