@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+signal health_depleted
+
+var health : int = 0
+@export var maxHealth : int = 3
+
 @export var runSpeed = 52.0
 
 # Jumping
@@ -16,6 +21,8 @@ var coyoteTime = 0.16
 var canJump : bool = true
 var coyoteTimer = 0.0
 
+func _ready():
+	health = maxHealth
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
@@ -38,9 +45,9 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 	
 	if direction:
-		velocity.x = lerp(velocity.x, direction * runSpeed, delta * 12)
+		velocity.x = lerp(velocity.x, direction * runSpeed, delta * 30)
 	else:
-		velocity.x = lerp(velocity.x, 0.0, delta * 16)
+		velocity.x = lerp(velocity.x, 0.0, delta * 20)
 	
 	# Clamp fall velocity
 	if velocity.y > 180:

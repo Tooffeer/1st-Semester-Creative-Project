@@ -1,34 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1s7r5gcfoqk4"]
+[gd_scene load_steps=4 format=3 uid="uid://b1s7r5gcfoqk4"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Player2D/player.gd" id="1_ede4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaaau"]
-size = Vector2(8, 8)
+size = Vector2(16, 24)
 
-[sub_resource type="QuadMesh" id="QuadMesh_6xtwv"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_50yws"]
+[sub_resource type="QuadMesh" id="QuadMesh_2vj0m"]
+size = Vector2(16, 24)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
-jumpHeight = 21.265
-jumpTimeToPeak = 0.405
-jumpTimeToDescent = 0.265
+runSpeed = 80.0
+jumpHeight = 45.0
+jumpTimeToPeak = 0.215
+jumpTimeToDescent = 0.172
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vaaau")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-scale = Vector2(8, 8)
-mesh = SubResource("QuadMesh_6xtwv")
+mesh = SubResource("QuadMesh_2vj0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, -39)
 zoom = Vector2(3.62, 3.62)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.7
 drag_bottom_margin = 0.24
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_50yws")

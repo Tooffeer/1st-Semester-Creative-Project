@@ -14,10 +14,6 @@ func _ready():
 func _process(_delta):
 	pass
 
-func _on_play_pressed():
-	loadScene()
-	$Title.hide()
-
 # Organize this later
 func loadScene():
 	# Get game scene
@@ -28,3 +24,4 @@ func loadScene():
 	self.add_child(instance)
 	instance.add_child(level_1)
 	instance.add_child(player)
+	player.position = Vector2(0, -50)
