@@ -1,27 +1,46 @@
 extends Node
 
+# Get nodes
+@onready var start = $Title/VBoxContainer/Start
+@onready var exit = $Title/VBoxContainer/Exit
+@onready var level_1_button = $Title/Level1
+
 # Preload scenes
-var gameScene = preload("res://Scenes/Game/game.tscn")
-var level_1 = preload("res://Scenes/Game/Levels/Level_1/level_1.tscn")
-var player = preload("res://Scenes/Game/Player2D/player.tscn")
+var gameScene = preload("res://Scenes/Game/game.tscn").instantiate()
+var level_1 = preload("res://Scenes/Game/Levels/Level_1/level_1.tscn").instantiate()
+var player = preload("res://Scenes/Game/Player2D/player.tscn").instantiate()
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	start.grab_focus()
+	level_1_button.hide()
+	loadScene(gameScene, self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
-# Organize this later
-func loadScene():
-	# Get game scene
-	var instance = gameScene.instantiate()
-	player = player.instantiate()
-	level_1 = level_1.instantiate()
-	# Add scene to the tree
-	self.add_child(instance)
-	instance.add_child(level_1)
-	instance.add_child(player)
-	player.position = Vector2(0, -50)
+# Adds the instanced scene to the tree at a specifc location
+func loadScene(instance, at):
+	at.add_child(instance)
+
+func _on_start_pressed():
+	# Fix this garbage later
+	level_1_button.show()
+	level_1_button.grab_focus()
+	$Title/VBoxContainer.hide()
+
+func _on_exit_pressed():
+	get_tree().quit()
+
+func _on_level_1_pressed():
+	# Load level 1 and player, added to gamescene
+	loadScene(level_1, gameScene)
+	loadScene(player, gameScene)
+	
+	# Hide title for now
+	$Title.hide()
+	
+	# Prevents player from spawning into map, remove until i get a spawnpoint working
+	player.position = Vector2(0,-40)

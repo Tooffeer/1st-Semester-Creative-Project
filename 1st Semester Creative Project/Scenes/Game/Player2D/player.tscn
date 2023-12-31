@@ -10,10 +10,10 @@ size = Vector2(16, 24)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
-runSpeed = 80.0
-jumpHeight = 45.0
-jumpTimeToPeak = 0.215
-jumpTimeToDescent = 0.172
+runSpeed = 77.0
+jumpHeight = 53.08
+jumpTimeToPeak = 0.27
+jumpTimeToDescent = 0.157
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vaaau")

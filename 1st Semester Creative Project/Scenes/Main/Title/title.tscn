@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyft3mxuxayyb"]
+[gd_scene load_steps=4 format=3 uid="uid://dyft3mxuxayyb"]
 
-[ext_resource type="Script" path="res://Scenes/Main/Title/title.gd" id="1_4tgk3"]
 [ext_resource type="Texture2D" uid="uid://bwe66qtiabqrr" path="res://Assets/Level Icons.png" id="2_5vrx4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6hain"]
@@ -18,7 +17,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4tgk3")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -55,23 +53,15 @@ size_flags_vertical = 0
 text = "Exit"
 icon_alignment = 1
 
-[node name="LevelContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Level1" type="TextureButton" parent="LevelContainer"]
+[node name="Level1" type="TextureButton" parent="."]
 layout_mode = 2
+offset_left = 383.0
+offset_top = 274.0
+offset_right = 383.0
+offset_bottom = 274.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 toggle_mode = true
 texture_normal = SubResource("AtlasTexture_6hain")
 texture_focused = SubResource("AtlasTexture_oym16")
 ignore_texture_size = true
-
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="LevelContainer/Level1" to="." method="_on_level_1_pressed"]
