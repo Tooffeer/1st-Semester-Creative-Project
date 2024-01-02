@@ -10,10 +10,10 @@ size = Vector2(16, 24)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
-runSpeed = 77.0
-jumpHeight = 53.08
-jumpTimeToPeak = 0.27
-jumpTimeToDescent = 0.157
+runSpeed = 120.0
+jumpHeight = 55.0
+jumpTimeToPeak = 0.265
+jumpTimeToDescent = 0.22
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vaaau")
@@ -23,7 +23,7 @@ mesh = SubResource("QuadMesh_2vj0m")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -39)
-zoom = Vector2(3.62, 3.62)
+zoom = Vector2(2.25, 2.25)
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_top_margin = 0.7

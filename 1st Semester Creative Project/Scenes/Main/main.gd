@@ -1,6 +1,7 @@
 extends Node
 
 # Get nodes
+@onready var animation_player = $AnimationPlayer
 @onready var start = $Title/VBoxContainer/Start
 @onready var exit = $Title/VBoxContainer/Exit
 @onready var level_1_button = $Title/Level1
@@ -37,10 +38,15 @@ func _on_exit_pressed():
 func _on_level_1_pressed():
 	# Load level 1 and player, added to gamescene
 	loadScene(level_1, gameScene)
-	loadScene(player, gameScene)
 	
 	# Hide title for now
 	$Title.hide()
+	
+	# Dissolve animation
+	animation_player.play("Dissolve")
+	await animation_player.animation_finished
+	animation_player.play_backwards("Dissolve")
+	loadScene(player, gameScene)
 	
 	# Prevents player from spawning into map, remove until i get a spawnpoint working
 	player.position = Vector2(0,-40)
