@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://Scenes/Game/Player2D/player.gd" id="1_ede4o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaaau"]
-size = Vector2(16, 24)
+size = Vector2(16, 32)
 
 [sub_resource type="QuadMesh" id="QuadMesh_2vj0m"]
-size = Vector2(16, 24)
+size = Vector2(16, 32)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
