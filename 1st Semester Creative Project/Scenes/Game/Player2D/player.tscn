@@ -14,6 +14,7 @@ runSpeed = 120.0
 jumpHeight = 55.0
 jumpTimeToPeak = 0.265
 jumpTimeToDescent = 0.22
+wallJumpPushback = 275.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vaaau")

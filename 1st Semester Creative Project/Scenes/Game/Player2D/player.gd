@@ -70,7 +70,7 @@ func jump(delta):
 		if is_on_wall() and Input.is_action_pressed("right"):
 			velocity.y = jumpVelocity
 			velocity.x = -wallJumpPushback
-			
+		
 		# Jumping off of a left wall
 		if is_on_wall() and Input.is_action_pressed("left"):
 			velocity.y = jumpVelocity
