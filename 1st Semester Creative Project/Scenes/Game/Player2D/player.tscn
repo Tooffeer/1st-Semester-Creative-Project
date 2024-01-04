@@ -1,18 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1s7r5gcfoqk4"]
+[gd_scene load_steps=9 format=3 uid="uid://b1s7r5gcfoqk4"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Player2D/player.gd" id="1_ede4o"]
+[ext_resource type="Texture2D" uid="uid://cpcf4jejgwgum" path="res://Assets/Beowulf Spritesheet - Copy-Sheet.png" id="2_w02we"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaaau"]
-size = Vector2(16, 32)
+size = Vector2(16, 31)
 
-[sub_resource type="QuadMesh" id="QuadMesh_2vj0m"]
-size = Vector2(16, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sljx"]
+atlas = ExtResource("2_w02we")
+region = Rect2(0, 0, 20, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6seo"]
+atlas = ExtResource("2_w02we")
+region = Rect2(20, 0, 20, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_55r76"]
+atlas = ExtResource("2_w02we")
+region = Rect2(40, 0, 20, 36)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dmws1"]
+atlas = ExtResource("2_w02we")
+region = Rect2(60, 0, 20, 36)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_inid1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sljx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6seo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_55r76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dmws1")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ede4o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_vaaau")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-mesh = SubResource("QuadMesh_2vj0m")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, -2)
+sprite_frames = SubResource("SpriteFrames_inid1")
+animation = &"Idle"
+frame_progress = 0.552081

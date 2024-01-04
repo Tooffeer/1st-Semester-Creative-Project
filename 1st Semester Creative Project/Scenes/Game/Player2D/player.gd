@@ -22,8 +22,11 @@ var MAXplayerHealth : float = 3
 
 var canJump : bool = true
 var coyoteTimer = 0.0
-
 var isWallSliding : bool
+
+# Animation
+var states = ["Idling", "Running", "Jumping", "Falling", "Attacking"]
+var currentState = states[0]
 
 func _ready():
 	# When player scene is created
@@ -48,6 +51,7 @@ func _physics_process(delta):
 		velocity.y = 300
 	
 	move_and_slide()
+	stateMachine()
 	
 	# Health system
 	if playerHealth <= 0:
@@ -103,3 +107,16 @@ func get_gravity():
 func die():
 	# Removes the player scene
 	queue_free()
+
+func stateMachine():
+	if (velocity.x == 0 and velocity.y == 0):
+		currentState = states[0]
+	
+	if velocity.x > 0:
+		$AnimatedSprite2D.flip_h = false
+	elif velocity.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	
+	if currentState == states[0]:
+		
+		$AnimatedSprite2D.play("Idle")
