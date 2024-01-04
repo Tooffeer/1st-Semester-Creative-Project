@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
+# Health variables
+signal playerHealthChanged(amount : float)
+var playerHealth : float = 4
+var MAXplayerHealth : float = 3
+
 # Running variables
-@export var runSpeed = 52.0
+@export var runSpeed = 120.0
 
 # Jumping variables
-@export var jumpHeight : float
-@export var jumpTimeToPeak : float
-@export var jumpTimeToDescent : float
+@export var jumpHeight : float = 55
+@export var jumpTimeToPeak : float = 0.265
+@export var jumpTimeToDescent : float = 0.22
 @export var coyoteTime : float = 0.16
-@export var wallJumpPushback : float = 250
+@export var wallJumpPushback : float = 275
 @export var wallJumpGravity : float = 90
 
 @onready var jumpVelocity : float = -((2.0 * jumpHeight) / jumpTimeToPeak)
@@ -18,16 +23,18 @@ extends CharacterBody2D
 var canJump : bool = true
 var coyoteTimer = 0.0
 
-var wallSliding : bool
-
+var isWallSliding : bool
 
 func _ready():
-	pass
+	# When player scene is created
+	playerHealth = MAXplayerHealth
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	# Movement functions
 	jump(delta)
 	wallSlide(delta)
+	
 	# Get player input direction
 	var direction = Input.get_axis("left", "right")
 	
@@ -36,36 +43,39 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, delta * 500)
 	
-	print(velocity.x)
-	
-	# Clamp fall velocity
+	# Clamp falling velocity
 	if velocity.y > 300:
 		velocity.y = 300
 	
 	move_and_slide()
- 
-func getGravity():
-	return jumpGravity if velocity.y < 0.0 else fallGravity
+	
+	# Health system
+	if playerHealth <= 0:
+		die()
 
 func jump(delta):
-	# Apply gravity
 	if not is_on_floor():
-		velocity.y += getGravity() * delta
+		# Apply gravity when in air
+		velocity.y += get_gravity() * delta
 		
+		# Starts the coyote timer
 		coyoteTimer += delta
+		# Player can still jump until the coyote timer goes over the time limit
 		if coyoteTimer > coyoteTime:
 			canJump = false
 	else:
+		# Since player is grounded the coyoteTimer is reset and allows jump
 		coyoteTimer = 0.0
 		canJump = true
 	
+	# When player jumps
 	if Input.is_action_just_pressed("jump"):
 		# Jumping from floor
 		if Input.is_action_pressed("jump"):
 			if canJump:
 				velocity.y = jumpVelocity
 				canJump = false
-		
+			
 		# Jumping off of a right wall
 		if is_on_wall() and Input.is_action_pressed("right"):
 			velocity.y = jumpVelocity
@@ -79,10 +89,17 @@ func jump(delta):
 func wallSlide(delta):
 	if is_on_wall() and !is_on_floor():
 		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
-			wallSliding = true
+			isWallSliding = true
 	else:
-		wallSliding = false
+		isWallSliding = false
 	
-	if wallSliding:
+	if isWallSliding:
 		velocity.y += wallJumpGravity * delta
 		velocity.y = min(velocity.y, wallJumpGravity)
+
+func get_gravity():
+	return jumpGravity if velocity.y < 0.0 else fallGravity
+
+func die():
+	# Removes the player scene
+	queue_free()

@@ -11,7 +11,6 @@ var gameScene = preload("res://Scenes/Game/game.tscn").instantiate()
 var level_1 = preload("res://Scenes/Game/Levels/Level_1/level_1.tscn").instantiate()
 var player = preload("res://Scenes/Game/Player2D/player.tscn").instantiate()
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	start.grab_focus()
