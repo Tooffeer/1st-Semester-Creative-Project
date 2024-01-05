@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@onready var sprite = $AnimatedSprite2D
+
 # Health variables
 signal playerHealthChanged(amount : float)
 var playerHealth : float = 4
@@ -111,15 +113,16 @@ func die():
 func stateMachine():
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
+		sprite.flip_h = false
 	elif velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
+		sprite.flip_h = true
 	
-	if (velocity.x == 0 and velocity.y == 0):
+	if velocity.x == 0 and velocity.y == 0:
 		currentState = states[0]
-	
-
+	elif velocity.x != 0 and velocity.y == 0:
+		currentState = states[1]
 	
 	if currentState == states[0]:
-		
-		$AnimatedSprite2D.play("Idle")
+		sprite.play("Idle")
+	elif currentState == states[1]:
+		sprite.play("Run")
