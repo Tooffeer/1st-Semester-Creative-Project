@@ -27,7 +27,7 @@ var coyoteTimer = 0.0
 var isWallSliding : bool
 
 # Animation
-var states = ["Idling", "Running", "Jumping", "Falling", "Attacking"]
+var states = ["Idling", "Running", "Jumping", "Falling", "Wallsliding"]
 var currentState = states[0]
 
 func _ready():
@@ -53,7 +53,7 @@ func _physics_process(delta):
 		velocity.y = 300
 	
 	move_and_slide()
-	stateMachine()
+	stateMachine(direction)
 	
 	# Health system
 	if playerHealth <= 0:
@@ -110,19 +110,43 @@ func die():
 	# Removes the player scene
 	queue_free()
 
-func stateMachine():
+func stateMachine(direction):
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
 		sprite.flip_h = false
 	elif velocity.x < 0:
 		sprite.flip_h = true
 	
-	if velocity.x == 0 and velocity.y == 0:
+	# Check player states
+	if isWallSliding == true:
+		# Is wallslidng
+		currentState = states[4]
+		# Flip sprite to correctly face wall
+		if direction < 0:
+			sprite.flip_h = false
+		if direction > 0:
+			sprite.flip_h = true
+	elif velocity.x == 0 and velocity.y == 0:
+		# Is standing still
 		currentState = states[0]
 	elif velocity.x != 0 and velocity.y == 0:
+		# Is moving on ground
 		currentState = states[1]
+	elif velocity.y < 0:
+		# Is rising
+		currentState = states[2]
+	elif velocity.y > 0:
+		# Is falling
+		currentState = states[3]
 	
+	# Play animation
 	if currentState == states[0]:
 		sprite.play("Idle")
 	elif currentState == states[1]:
 		sprite.play("Run")
+	elif currentState == states[2]:
+		sprite.play("Jump")
+	elif currentState == states[3]:
+		sprite.play("Fall")
+	elif currentState == states[4]:
+		sprite.play("Wallslide")
