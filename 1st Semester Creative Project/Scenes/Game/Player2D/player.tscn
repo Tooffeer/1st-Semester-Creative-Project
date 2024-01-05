@@ -50,7 +50,14 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_vaaau")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, -2)
+position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_inid1")
 animation = &"Idle"
-frame_progress = 0.552081
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.75, 2.75)
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.28
+drag_top_margin = 0.5
+drag_bottom_margin = 0.35

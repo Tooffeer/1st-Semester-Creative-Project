@@ -42,9 +42,9 @@ func _physics_process(delta):
 	var direction = Input.get_axis("left", "right")
 	
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * runSpeed, delta * 500)
+		velocity.x = move_toward(velocity.x, direction * runSpeed, delta * 600)
 	else:
-		velocity.x = move_toward(velocity.x, 0, delta * 500)
+		velocity.x = move_toward(velocity.x, 0, delta * 600)
 	
 	# Clamp falling velocity
 	if velocity.y > 300:
@@ -109,13 +109,16 @@ func die():
 	queue_free()
 
 func stateMachine():
-	if (velocity.x == 0 and velocity.y == 0):
-		currentState = states[0]
-	
+	# Face sprite in the direction of movement
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 	elif velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
+	
+	if (velocity.x == 0 and velocity.y == 0):
+		currentState = states[0]
+	
+
 	
 	if currentState == states[0]:
 		
