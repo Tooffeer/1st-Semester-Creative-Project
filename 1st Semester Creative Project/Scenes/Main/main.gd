@@ -9,7 +9,6 @@ extends Node
 # Preload scenes
 var gameScene = preload("res://Scenes/Game/game.tscn").instantiate()
 var level_1 = preload("res://Scenes/Game/Levels/Level_1/level_1.tscn").instantiate()
-var player = preload("res://Scenes/Game/Player2D/player.tscn").instantiate()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,7 +34,7 @@ func _on_exit_pressed():
 	get_tree().quit()
 
 func _on_level_1_pressed():
-	# Load level 1 and player, added to gamescene
+	# Load level 1, added to gamescene
 	loadScene(level_1, gameScene)
 	
 	# Hide title for now
@@ -45,7 +44,3 @@ func _on_level_1_pressed():
 	animation_player.play("Dissolve")
 	await animation_player.animation_finished
 	animation_player.play_backwards("Dissolve")
-	loadScene(player, gameScene)
-	
-	# Prevents player from spawning into map, remove until i get a spawnpoint working
-	player.position = Vector2(0,-40)

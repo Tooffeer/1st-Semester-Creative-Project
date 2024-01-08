@@ -177,12 +177,3 @@ shape = SubResource("RectangleShape2D_vaaau")
 sprite_frames = SubResource("SpriteFrames_inid1")
 animation = &"Wallslide"
 frame_progress = 0.272737
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -28)
-zoom = Vector2(2.75, 2.75)
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.28
-drag_top_margin = 0.5
-drag_bottom_margin = 0.35

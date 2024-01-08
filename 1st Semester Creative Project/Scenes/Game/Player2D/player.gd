@@ -34,6 +34,7 @@ func _ready():
 	# When player scene is created
 	playerHealth = MAXplayerHealth
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# Get player input direction
@@ -64,7 +65,7 @@ func _physics_process(delta):
 func jump(delta, direction):
 	if not is_on_floor():
 		# Apply gravity when in air
-		velocity.y += get_gravity() * delta
+		velocity.y += getGravity() * delta
 		
 		# Starts the coyote timer
 		coyoteTimer += delta
@@ -93,7 +94,7 @@ func jump(delta, direction):
 
 func wallSlide(delta, direction):
 	if is_on_wall() and !is_on_floor():
-		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		if direction != 0:
 			isWallSliding = true
 	else:
 		isWallSliding = false
@@ -102,7 +103,7 @@ func wallSlide(delta, direction):
 		velocity.y += wallJumpGravity * delta
 		velocity.y = min(velocity.y, wallJumpGravity)
 
-func get_gravity():
+func getGravity():
 	return jumpGravity if velocity.y < 0.0 else fallGravity
 
 func stateMachine(direction):
