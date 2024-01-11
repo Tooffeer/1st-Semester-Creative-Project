@@ -14,7 +14,6 @@ var level_1 = preload("res://Scenes/Game/Levels/Level_1/level_1.tscn").instantia
 func _ready():
 	start.grab_focus()
 	level_1_button.hide()
-	loadScene(gameScene, self)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -35,6 +34,7 @@ func _on_exit_pressed():
 
 func _on_level_1_pressed():
 	# Load level 1, added to gamescene
+	loadScene(gameScene, self)
 	loadScene(level_1, gameScene)
 	
 	# Hide title for now

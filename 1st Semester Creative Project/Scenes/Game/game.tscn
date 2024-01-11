@@ -8,3 +8,8 @@ script = ExtResource("1_4barx")
 [node name="CameraAnchor" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="CameraAnchor"]
+zoom = Vector2(2.75, 2.75)
+rotation_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.3
