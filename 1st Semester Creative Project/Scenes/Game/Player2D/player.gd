@@ -3,8 +3,7 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 
 # Health variables
-signal playerHealthChanged(amount : float)
-var playerHealth : float = 4
+var playerHealth : float = 0
 var MAXplayerHealth : float = 3
 
 # Running variables
@@ -31,9 +30,7 @@ var states = ["Idle", "Run", "Jump", "Fall", "Wallslide"]
 var currentState = states[0]
 
 func _ready():
-	# When player scene is created
 	playerHealth = MAXplayerHealth
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -142,4 +139,4 @@ func stateMachine(direction):
 
 func die():
 	# Removes the player scene
-	queue_free()
+	pass
