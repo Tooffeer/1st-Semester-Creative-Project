@@ -138,5 +138,5 @@ func stateMachine(direction):
 			sprite.play(state)
 
 func die():
-	# Removes the player scene
-	pass
+	playerHealth = MAXplayerHealth
+	get_tree().reload_current_scene()
