@@ -4,6 +4,7 @@ extends Node
 @onready var animation_player = $AnimationPlayer
 @onready var start = $Title/VBoxContainer/Start
 @onready var exit = $Title/VBoxContainer/Exit
+@onready var audio_stream_player_2d = $Title/AudioStreamPlayer2D
 
 # Preload scenes
 var gameScene = preload("res://Scenes/Game/game.tscn").instantiate()
@@ -13,6 +14,7 @@ var gameScene = preload("res://Scenes/Game/game.tscn").instantiate()
 func _ready():
 	print("Main loaded")
 	start.grab_focus()
+	audio_stream_player_2d.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

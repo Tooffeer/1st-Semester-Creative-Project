@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://okpb5gr685vo"
+path="res://.godot/imported/6-07 I'll Wait.wav-76a8da87f0e26ae4e0a0f5121e3b038a.sample"
+
+[deps]
+
+source_file="res://Assets/6-07 I'll Wait.wav"
+dest_files=["res://.godot/imported/6-07 I'll Wait.wav-76a8da87f0e26ae4e0a0f5121e3b038a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

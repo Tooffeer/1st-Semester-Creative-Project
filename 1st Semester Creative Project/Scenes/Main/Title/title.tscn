@@ -1,11 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyft3mxuxayyb"]
 
 [ext_resource type="Texture2D" uid="uid://crwi3qukcon3h" path="res://Assets/Title Screen Art.png" id="1_4kmi0"]
+[ext_resource type="AudioStream" uid="uid://okpb5gr685vo" path="res://Assets/6-07 I'll Wait.wav" id="2_7b1e8"]
 
 [sub_resource type="Theme" id="Theme_h6xtk"]
-
-[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_a2lj6"]
-bpm = 12.75
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -48,4 +46,4 @@ text = "Exit"
 icon_alignment = 1
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = SubResource("AudioStreamMP3_a2lj6")
+stream = ExtResource("2_7b1e8")
