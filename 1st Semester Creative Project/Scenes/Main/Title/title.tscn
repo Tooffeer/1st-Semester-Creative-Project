@@ -1,14 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyft3mxuxayyb"]
 
-[ext_resource type="Texture2D" uid="uid://bwe66qtiabqrr" path="res://Assets/Level Icons.png" id="2_5vrx4"]
+[ext_resource type="Texture2D" uid="uid://crwi3qukcon3h" path="res://Assets/Title Screen Art.png" id="1_4kmi0"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6hain"]
-atlas = ExtResource("2_5vrx4")
-region = Rect2(0, 0, 64, 64)
+[sub_resource type="Theme" id="Theme_h6xtk"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oym16"]
-atlas = ExtResource("2_5vrx4")
-region = Rect2(128, 0, 64, 64)
+[sub_resource type="AudioStreamMP3" id="AudioStreamMP3_a2lj6"]
+bpm = 12.75
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -18,25 +15,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.34902, 0.25098, 0.27451, 1)
+texture = ExtResource("1_4kmi0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 60.695
-offset_top = -33.0
-offset_right = 106.695
-offset_bottom = 33.0
-grow_vertical = 2
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 65.0
+offset_top = -145.0
+offset_right = 111.0
+offset_bottom = -79.0
+grow_vertical = 0
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -46,18 +43,9 @@ icon_alignment = 1
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
+theme = SubResource("Theme_h6xtk")
 text = "Exit"
 icon_alignment = 1
 
-[node name="Level1" type="TextureButton" parent="."]
-layout_mode = 2
-offset_left = 383.0
-offset_top = 274.0
-offset_right = 383.0
-offset_bottom = 274.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-toggle_mode = true
-texture_normal = SubResource("AtlasTexture_6hain")
-texture_focused = SubResource("AtlasTexture_oym16")
-ignore_texture_size = true
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamMP3_a2lj6")

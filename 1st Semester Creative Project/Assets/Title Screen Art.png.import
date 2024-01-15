@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpcf4jejgwgum"
-path="res://.godot/imported/Beowulf Spritesheet - Copy-Sheet.png-d0a834dfcfa4afa0fb0a88231eca99a0.ctex"
+uid="uid://crwi3qukcon3h"
+path="res://.godot/imported/Title Screen Art.png-3357780e40a675d521368c69b159ee52.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Beowulf Spritesheet - Copy-Sheet.png"
-dest_files=["res://.godot/imported/Beowulf Spritesheet - Copy-Sheet.png-d0a834dfcfa4afa0fb0a88231eca99a0.ctex"]
+source_file="res://Assets/Title Screen Art.png"
+dest_files=["res://.godot/imported/Title Screen Art.png-3357780e40a675d521368c69b159ee52.ctex"]
 
 [params]
 

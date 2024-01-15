@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
+@onready var sprite = $AnimatedSprite2D
+
 # Health variables
-signal playerHealthChanged(amount : float)
-var playerHealth : float = 4
+var playerHealth : float = 0
 var MAXplayerHealth : float = 3
 
 # Running variables
@@ -10,7 +11,7 @@ var MAXplayerHealth : float = 3
 
 # Jumping variables
 @export var jumpHeight : float = 55
-@export var jumpTimeToPeak : float = 0.265
+@export var jumpTimeToPeak : float = 0.295
 @export var jumpTimeToDescent : float = 0.22
 @export var coyoteTime : float = 0.16
 @export var wallJumpPushback : float = 275
@@ -25,22 +26,22 @@ var coyoteTimer = 0.0
 var isWallSliding : bool
 
 # Animation
-var states = ["Idling", "Running", "Jumping", "Falling", "Attacking"]
+var states = ["Idle", "Run", "Jump", "Fall", "Wallslide"]
 var currentState = states[0]
 
 func _ready():
-	# When player scene is created
 	playerHealth = MAXplayerHealth
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Movement functions
-	jump(delta)
-	wallSlide(delta)
-	
 	# Get player input direction
 	var direction = Input.get_axis("left", "right")
 	
+	# Movement functions
+	jump(delta, direction)
+	wallSlide(delta, direction)
+	
+	# Get horizontal velocity
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * runSpeed, delta * 600)
 	else:
@@ -51,16 +52,17 @@ func _physics_process(delta):
 		velocity.y = 300
 	
 	move_and_slide()
-	stateMachine()
 	
 	# Health system
 	if playerHealth <= 0:
 		die()
+	
+	stateMachine(direction)
 
-func jump(delta):
+func jump(delta, direction):
 	if not is_on_floor():
 		# Apply gravity when in air
-		velocity.y += get_gravity() * delta
+		velocity.y += getGravity() * delta
 		
 		# Starts the coyote timer
 		coyoteTimer += delta
@@ -72,27 +74,24 @@ func jump(delta):
 		coyoteTimer = 0.0
 		canJump = true
 	
-	# When player jumps
-	if Input.is_action_just_pressed("jump"):
-		# Jumping from floor
-		if Input.is_action_pressed("jump"):
-			if canJump:
-				velocity.y = jumpVelocity
-				canJump = false
-			
-		# Jumping off of a right wall
-		if is_on_wall() and Input.is_action_pressed("right"):
+	# When player tries to jump
+	if Input.is_action_just_pressed("jump") and is_on_wall():
+		# Jumping off of a wall
+		if direction != 0:
 			velocity.y = jumpVelocity
-			velocity.x = -wallJumpPushback
-		
-		# Jumping off of a left wall
-		if is_on_wall() and Input.is_action_pressed("left"):
+			if direction < 0:
+				velocity.x = wallJumpPushback
+			if direction > 0:
+				velocity.x = -wallJumpPushback
+	if Input.is_action_pressed("jump"):
+		# Jumping from ground
+		if canJump:
 			velocity.y = jumpVelocity
-			velocity.x = wallJumpPushback
+			canJump = false
 
-func wallSlide(delta):
+func wallSlide(delta, direction):
 	if is_on_wall() and !is_on_floor():
-		if Input.is_action_pressed("left") or Input.is_action_pressed("right"):
+		if direction != 0:
 			isWallSliding = true
 	else:
 		isWallSliding = false
@@ -101,25 +100,43 @@ func wallSlide(delta):
 		velocity.y += wallJumpGravity * delta
 		velocity.y = min(velocity.y, wallJumpGravity)
 
-func get_gravity():
+func getGravity():
 	return jumpGravity if velocity.y < 0.0 else fallGravity
 
-func die():
-	# Removes the player scene
-	queue_free()
-
-func stateMachine():
+func stateMachine(direction):
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
-		$AnimatedSprite2D.flip_h = false
+		sprite.flip_h = false
 	elif velocity.x < 0:
-		$AnimatedSprite2D.flip_h = true
+		sprite.flip_h = true
 	
-	if (velocity.x == 0 and velocity.y == 0):
+	# Check player states
+	if isWallSliding == true:
+		# Is wallslidng
+		currentState = states[4]
+		# Flip sprite to correctly face wall
+		if direction < 0:
+			sprite.flip_h = false
+		if direction > 0:
+			sprite.flip_h = true
+	elif velocity == Vector2.ZERO:
+		# Is standing still
 		currentState = states[0]
+	elif velocity.y < 0:
+		# Is rising
+		currentState = states[2]
+	elif velocity.y > 0:
+		# Is falling
+		currentState = states[3]
+	elif velocity.x != 0:
+		# Is moving on ground
+		currentState = states[1]
 	
+	# Match state with animation
+	for state in states:
+		if currentState == state:
+			sprite.play(state)
 
-	
-	if currentState == states[0]:
-		
-		$AnimatedSprite2D.play("Idle")
+func die():
+	playerHealth = MAXplayerHealth
+	get_tree().reload_current_scene()
