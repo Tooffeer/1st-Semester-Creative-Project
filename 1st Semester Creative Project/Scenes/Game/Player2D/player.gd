@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var sprite = $AnimatedSprite2D
+@onready var attack_area = $attackArea
 
 # Health variables
 var playerHealth : float = 0
@@ -136,6 +137,8 @@ func stateMachine(direction):
 	for state in states:
 		if currentState == state:
 			sprite.play(state)
+
+
 
 func die():
 	playerHealth = MAXplayerHealth
