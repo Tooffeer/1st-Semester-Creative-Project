@@ -26,8 +26,14 @@ var canJump : bool = true
 var coyoteTimer = 0.0
 var isWallSliding : bool
 
+# Attack
+var canAttack : bool = false
+var isAttacking = false
+var cooldownTimer = 0.0
+
+
 # Animation
-var states = ["Idle", "Run", "Jump", "Fall", "Wallslide"]
+var states = ["Idle", "Run", "Jump", "Fall", "Wallslide", "Attack"]
 var currentState = states[0]
 
 func _ready():
@@ -35,10 +41,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Get player input direction
+	# Get input direction from player
 	var direction = Input.get_axis("left", "right")
 	
-	# Movement functions
+	# Call functions
 	jump(delta, direction)
 	wallSlide(delta, direction)
 	
@@ -48,25 +54,19 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, delta * 600)
 	
-	# Clamp falling velocity
+	# Clamp falling speed
 	if velocity.y > 300:
 		velocity.y = 300
 	
+	# Move and animate plater
 	move_and_slide()
+	stateMachine(direction)
 	
-	
-	
-	# Kill player 
+	# Check player health
 	if playerHealth <= 0:
 		die()
 	
-	
-	if Input.is_action_just_pressed("attack"):
-		print("Pressed")
-		sprite.play("Attack")
-		await sprite.animation_finished
-	
-	stateMachine(direction)
+	attack(delta)
 
 func jump(delta, direction):
 	if not is_on_floor():
@@ -113,6 +113,29 @@ func wallSlide(delta, direction):
 func getGravity():
 	return jumpGravity if velocity.y < 0.0 else fallGravity
 
+func attack(delta):
+	cooldownTimer += delta
+	if is_on_floor():
+		canAttack = true
+	else:
+		canAttack = false
+	
+	
+	if Input.is_action_just_pressed("attack") and canAttack:
+		print("Attacking")
+		
+		attack_area.monitoring = true
+		isAttacking = true
+		await sprite.animation_finished
+		attack_area.monitoring = false
+		isAttacking = false
+		cooldownTimer = 0.0
+
+func _on_attack_area_body_entered(body):
+	if body.is_in_group("enemy"):
+		body.health -= 2
+		print("Enemy :", body.health)
+
 func stateMachine(direction):
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
@@ -120,9 +143,10 @@ func stateMachine(direction):
 	elif velocity.x < 0:
 		sprite.flip_h = true
 	
-	
 	# Check player states
-	if isWallSliding == true:
+	if isAttacking == true:
+		currentState = states[5]
+	elif isWallSliding == true:
 		# Is wallslidng
 		currentState = states[4]
 		# Flip sprite to correctly face wall

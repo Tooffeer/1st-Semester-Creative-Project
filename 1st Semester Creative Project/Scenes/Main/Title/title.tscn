@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://crwi3qukcon3h" path="res://Assets/Title Screen Art.png" id="1_4kmi0"]
 [ext_resource type="AudioStream" uid="uid://okpb5gr685vo" path="res://Assets/6-07 I'll Wait.wav" id="2_7b1e8"]
 
-[sub_resource type="Theme" id="Theme_h6xtk"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47v8h"]
+bg_color = Color(0, 0, 0, 0.760784)
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -27,21 +28,22 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 65.0
-offset_top = -145.0
-offset_right = 111.0
-offset_bottom = -79.0
+offset_left = 135.0
+offset_top = -120.0
+offset_right = 459.0
+offset_bottom = -53.9997
 grow_vertical = 0
 
 [node name="Start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_47v8h")
 text = "Start"
 icon_alignment = 1
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-theme = SubResource("Theme_h6xtk")
+theme_override_styles/normal = SubResource("StyleBoxFlat_47v8h")
 text = "Exit"
 icon_alignment = 1
 

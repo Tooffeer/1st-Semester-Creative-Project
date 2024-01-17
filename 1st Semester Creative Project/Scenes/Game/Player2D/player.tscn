@@ -95,7 +95,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 7.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -180,7 +180,8 @@ shape = SubResource("RectangleShape2D_vaaau")
 scale = Vector2(1.17959, 1.00982)
 sprite_frames = SubResource("SpriteFrames_inid1")
 animation = &"Attack"
-frame_progress = 0.904737
+frame = 3
+frame_progress = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.25, 2.25)
@@ -189,8 +190,12 @@ drag_vertical_enabled = true
 drag_top_margin = 0.35
 
 [node name="attackArea" type="Area2D" parent="."]
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
 position = Vector2(18, -1.92802)
 scale = Vector2(2.09419, 0.784831)
 shape = SubResource("RectangleShape2D_ncbf5")
+
+[connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="attackArea" to="." method="_on_attack_area_body_exited"]
