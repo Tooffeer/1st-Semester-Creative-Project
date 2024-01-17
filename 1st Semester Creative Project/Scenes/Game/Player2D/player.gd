@@ -54,9 +54,17 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-	# Health system
+	
+	
+	# Kill player 
 	if playerHealth <= 0:
 		die()
+	
+	
+	if Input.is_action_just_pressed("attack"):
+		print("Pressed")
+		sprite.play("Attack")
+		await sprite.animation_finished
 	
 	stateMachine(direction)
 
@@ -84,6 +92,7 @@ func jump(delta, direction):
 				velocity.x = wallJumpPushback
 			if direction > 0:
 				velocity.x = -wallJumpPushback
+	
 	if Input.is_action_pressed("jump"):
 		# Jumping from ground
 		if canJump:
@@ -111,6 +120,7 @@ func stateMachine(direction):
 	elif velocity.x < 0:
 		sprite.flip_h = true
 	
+	
 	# Check player states
 	if isWallSliding == true:
 		# Is wallslidng
@@ -137,8 +147,6 @@ func stateMachine(direction):
 	for state in states:
 		if currentState == state:
 			sprite.play(state)
-
-
 
 func die():
 	playerHealth = MAXplayerHealth

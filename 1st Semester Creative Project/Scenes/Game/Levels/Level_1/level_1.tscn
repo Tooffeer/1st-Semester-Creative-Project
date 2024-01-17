@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dghevlmefbuwo"]
+[gd_scene load_steps=7 format=3 uid="uid://dghevlmefbuwo"]
 
 [ext_resource type="Texture2D" uid="uid://bfxrtabylt1cv" path="res://Assets/Level 1 Tileset.png" id="1_tsers"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/Level_1/level_1.gd" id="1_umwc2"]
+[ext_resource type="PackedScene" uid="uid://cim2loedcchwr" path="res://Scenes/Game/Enemies/Zombie/zombie.tscn" id="3_sdciv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvt4d"]
 texture = ExtResource("1_tsers")
@@ -137,5 +138,10 @@ shape = SubResource("RectangleShape2D_4myib")
 
 [node name="Spawner" type="Node2D" parent="Spawners"]
 position = Vector2(-31, -39)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Zombie" parent="Enemies" instance=ExtResource("3_sdciv")]
+position = Vector2(-179, -419)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

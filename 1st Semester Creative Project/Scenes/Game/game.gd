@@ -11,13 +11,6 @@ func _ready():
 	
 	print("Game loaded")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-  
-func loadLevel1():
-	pass
-
-func spawnPlayer(position):
+func spawnPlayer(pos):
 	self.add_child(player)
-	player.position = position
+	player.position = pos
