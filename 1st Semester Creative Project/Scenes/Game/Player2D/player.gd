@@ -115,7 +115,7 @@ func getGravity():
 
 func attack(delta):
 	cooldownTimer += delta
-	if is_on_floor():
+	if is_on_floor() and cooldownTimer:
 		canAttack = true
 	else:
 		canAttack = false
@@ -140,8 +140,10 @@ func stateMachine(direction):
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
 		sprite.flip_h = false
+		$attackArea/CollisionShape2D.position.x = -($attackArea/CollisionShape2D.position.x)
 	elif velocity.x < 0:
 		sprite.flip_h = true
+		$attackArea/CollisionShape2D.position.x = -($attackArea/CollisionShape2D.position.x)
 	
 	# Check player states
 	if isAttacking == true:
