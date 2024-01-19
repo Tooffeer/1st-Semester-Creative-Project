@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cim2loedcchwr"]
+[gd_scene load_steps=6 format=3 uid="uid://cim2loedcchwr"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Enemies/Zombie/Zombie.gd" id="1_f7gv0"]
 
@@ -10,6 +10,15 @@ size = Vector2(16, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2bod"]
 radius = 19.0263
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s8rm6"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+spread = 77.793
+initial_velocity_min = 72.88
+initial_velocity_max = 221.43
+gravity = Vector3(0, 98, 0)
+color = Color(0.658824, 0.0588235, 0.0588235, 1)
 
 [node name="Zombie" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_f7gv0")
@@ -25,6 +34,16 @@ mesh = SubResource("QuadMesh_sp4hw")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
 scale = Vector2(1.01728, 1)
 shape = SubResource("CircleShape2D_v2bod")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 21
+process_material = SubResource("ParticleProcessMaterial_s8rm6")
+lifetime = 0.5
+one_shot = true
+trail_enabled = true
+trail_lifetime = 0.23
+trail_sections = 4
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

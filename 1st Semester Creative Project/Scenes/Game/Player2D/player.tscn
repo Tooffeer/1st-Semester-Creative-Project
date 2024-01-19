@@ -295,6 +295,7 @@ scale = Vector2(2.09419, 0.784831)
 shape = SubResource("RectangleShape2D_ncbf5")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="attackArea/CollisionShape2D"]
+visible = false
 position = Vector2(0.20805, 0.63708)
 scale = Vector2(21.488, 39.499)
 mesh = SubResource("QuadMesh_f62wr")

@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
-var health = 3
-var damage = 1
-
+# Get nodes
 @onready var hitbox = $Hitbox
+@onready var gpu_particles_2d = $GPUParticles2D
 
+# Signals
+signal healthChanged
+
+@export var health = 3
+@export var damage = 1
+@export var x = health
+
+@export var cooldown = 0.7
+var cooldownTimer = 0.0
 var playerInRange = false
 var isAttacking = false
-var cooldown = 1.0
-var t = 0.0
-
 var player
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -19,6 +24,10 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	if health != x:
+		gpu_particles_2d.emitting = true
+		x = health
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -32,11 +41,11 @@ func _physics_process(delta):
 		die()
 
 func attack(delta):
-	t += delta
+	cooldownTimer  += delta
 	
-	if playerInRange and t > cooldown:
-		player.playerHealth -= 1
-		t = 0.0
+	if playerInRange and cooldownTimer > cooldown:
+		player.playerHealth -= damage
+		cooldownTimer = 0.0
 		print("Player: ", player.playerHealth)
 
 func _on_hitbox_body_entered(body):
