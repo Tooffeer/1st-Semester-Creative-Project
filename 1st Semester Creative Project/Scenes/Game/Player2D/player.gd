@@ -1,50 +1,48 @@
 extends CharacterBody2D
 
+# Get nodes
 @onready var sprite = $AnimatedSprite2D
 @onready var attack_area = $attackArea
-
-# Health variables
-var playerHealth : float = 0
-var MAXplayerHealth : float = 3
 
 # Running variables
 @export var runSpeed = 120.0
 
-# Jumping variables
+# Jump variables
 @export var jumpHeight : float = 55
 @export var jumpTimeToPeak : float = 0.295
 @export var jumpTimeToDescent : float = 0.22
+
+# Coyote jump variables
 @export var coyoteTime : float = 0.16
+var coyoteTimer = 0.0
+var canJump : bool = true
+
+# Wall jumping variables
 @export var wallJumpPushback : float = 275
 @export var wallJumpGravity : float = 90
-
-@onready var jumpVelocity : float = -((2.0 * jumpHeight) / jumpTimeToPeak)
-@onready var jumpGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToPeak, 2.0))
-@onready var fallGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToDescent, 2.0))
-
-var canJump : bool = true
-var coyoteTimer = 0.0
 var isWallSliding : bool
 
-# Attack
-var canAttack : bool = false
+# Health variables
+var MAXplayerHealth : float = 3
+var playerHealth : float = 0
+
+# Attack variables
 var isAttacking = false
-var cooldownTimer = 0.0
 
-
-# Animation
-var states = ["Idle", "Run", "Jump", "Fall", "Wallslide", "Attack"]
+# Animation variables
+var states = ["Idle", "Run", "Jump", "Fall", "Wallslide", "Attack", "Die"]
 var currentState = states[0]
 
+
 func _ready():
+	# Set player's health to full
 	playerHealth = MAXplayerHealth
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	# Get input direction from player
+	# Input direction from player
 	var direction = Input.get_axis("left", "right")
 	
-	# Call functions
 	jump(delta, direction)
 	wallSlide(delta, direction)
 	
@@ -60,44 +58,50 @@ func _physics_process(delta):
 	
 	# Move and animate plater
 	move_and_slide()
-	stateMachine(direction)
+	attack(delta)
 	
 	# Check player health
 	if playerHealth <= 0:
 		die()
 	
-	attack(delta)
+	stateMachine(direction)
 
 func jump(delta, direction):
+	var jumpVelocity : float = -((2.0 * jumpHeight) / jumpTimeToPeak)
+	var jumpGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToPeak, 2.0))
+	var fallGravity : float = -((-2.0 * jumpHeight) / pow(jumpTimeToDescent, 2.0))
+	
 	if not is_on_floor():
 		# Apply gravity when in air
-		velocity.y += getGravity() * delta
+		velocity.y += getGravity(jumpGravity, fallGravity) * delta
 		
-		# Starts the coyote timer
+		# Start the coyote timer since player has left floor
 		coyoteTimer += delta
+		
 		# Player can still jump until the coyote timer goes over the time limit
 		if coyoteTimer > coyoteTime:
 			canJump = false
 	else:
-		# Since player is grounded the coyoteTimer is reset and allows jump
+		# Player is on floor so they can jump and coyoteTimer is reset
 		coyoteTimer = 0.0
 		canJump = true
 	
-	# When player tries to jump
+	# Jumping from ground
+	if Input.is_action_pressed("jump"):
+		if canJump:
+			velocity.y = jumpVelocity
+			canJump = false
+	
+	# Jumping off of a wall
 	if Input.is_action_just_pressed("jump") and is_on_wall():
-		# Jumping off of a wall
+		# If player is on wall and pushing against it
 		if direction != 0:
 			velocity.y = jumpVelocity
+			# Push off from the wall, oriented correctly
 			if direction < 0:
 				velocity.x = wallJumpPushback
 			if direction > 0:
 				velocity.x = -wallJumpPushback
-	
-	if Input.is_action_pressed("jump"):
-		# Jumping from ground
-		if canJump:
-			velocity.y = jumpVelocity
-			canJump = false
 
 func wallSlide(delta, direction):
 	if is_on_wall() and !is_on_floor():
@@ -110,26 +114,21 @@ func wallSlide(delta, direction):
 		velocity.y += wallJumpGravity * delta
 		velocity.y = min(velocity.y, wallJumpGravity)
 
-func getGravity():
-	return jumpGravity if velocity.y < 0.0 else fallGravity
+func getGravity(jumpGravity, fallGravity):
+	if velocity.y < 0.0: 
+		return jumpGravity
+	else:
+		return fallGravity
 
 func attack(delta):
-	cooldownTimer += delta
-	if is_on_floor() and cooldownTimer:
-		canAttack = true
-	else:
-		canAttack = false
-	
-	
-	if Input.is_action_just_pressed("attack") and canAttack:
+	attack_area.monitoring = false
+	if Input.is_action_just_pressed("attack") and is_on_floor():
 		print("Attacking")
-		
-		attack_area.monitoring = true
 		isAttacking = true
+		attack_area.monitoring = true
 		await sprite.animation_finished
-		attack_area.monitoring = false
 		isAttacking = false
-		cooldownTimer = 0.0
+		attack_area.monitoring = false
 
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("enemy"):
@@ -138,12 +137,12 @@ func _on_attack_area_body_entered(body):
 
 func stateMachine(direction):
 	# Face sprite in the direction of movement
-	if velocity.x > 0:
+	if velocity.x > 0 or isWallSliding and direction < 0:
 		sprite.flip_h = false
-		$attackArea/CollisionShape2D.position.x = -($attackArea/CollisionShape2D.position.x)
-	elif velocity.x < 0:
+		attack_area.position = Vector2(22.564, 0.5)
+	elif velocity.x < 0 or isWallSliding and direction > 0:
 		sprite.flip_h = true
-		$attackArea/CollisionShape2D.position.x = -($attackArea/CollisionShape2D.position.x)
+		attack_area.position = Vector2(-22.564, 0.5)
 	
 	# Check player states
 	if isAttacking == true:
@@ -151,11 +150,6 @@ func stateMachine(direction):
 	elif isWallSliding == true:
 		# Is wallslidng
 		currentState = states[4]
-		# Flip sprite to correctly face wall
-		if direction < 0:
-			sprite.flip_h = false
-		if direction > 0:
-			sprite.flip_h = true
 	elif velocity == Vector2.ZERO:
 		# Is standing still
 		currentState = states[0]
@@ -175,5 +169,4 @@ func stateMachine(direction):
 			sprite.play(state)
 
 func die():
-	playerHealth = MAXplayerHealth
 	get_tree().reload_current_scene()
