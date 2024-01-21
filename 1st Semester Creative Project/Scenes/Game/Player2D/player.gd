@@ -29,11 +29,6 @@ var playerHealth : float = 0
 # Attack variables
 var isAttacking = false
 
-# Animation variables
-var states = ["Idle", "Run", "Jump", "Fall", "Wallslide", "Attack", "Die"]
-var currentState = states[0]
-
-
 func _ready():
 	# Set player's health to full
 	playerHealth = MAXplayerHealth
@@ -65,7 +60,7 @@ func _physics_process(delta):
 		
 		die()
 	
-	stateMachine(direction)
+	animate(direction)
 
 func jump(delta, direction):
 	var jumpVelocity : float = -((2.0 * jumpHeight) / jumpTimeToPeak)
@@ -136,7 +131,7 @@ func _on_attack_area_body_entered(body):
 		body.health -= 2
 		print("Enemy :", body.health)
 
-func stateMachine(direction):
+func animate(direction):
 	# Face sprite in the direction of movement
 	if velocity.x > 0 or isWallSliding and direction < 0:
 		sprite.flip_h = false
@@ -145,29 +140,20 @@ func stateMachine(direction):
 		sprite.flip_h = true
 		attack_area.position = Vector2(-22.564, 0.5)
 	
-	# Check player states
+	# Play animations
 	if isAttacking == true:
-		currentState = states[5]
+		sprite.play("Attack")
+		await sprite.animation_finished
 	elif isWallSliding == true:
-		# Is wallslidng
-		currentState = states[4]
-	elif velocity == Vector2.ZERO:
-		# Is standing still
-		currentState = states[0]
+		sprite.play("Wallslide")
 	elif velocity.y < 0:
-		# Is rising
-		currentState = states[2]
+		sprite.play("Jump")
 	elif velocity.y > 0:
-		# Is falling
-		currentState = states[3]
+		sprite.play("Fall")
 	elif velocity.x != 0:
-		# Is moving on ground
-		currentState = states[1]
-	
-	# Match state with animation
-	for state in states:
-		if currentState == state:
-			sprite.play(state)
+		sprite.play("Run")
+	elif velocity == Vector2.ZERO:
+		sprite.play("Idle")
 
 func die():
 	get_tree().reload_current_scene()

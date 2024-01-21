@@ -280,7 +280,8 @@ shape = SubResource("RectangleShape2D_vaaau")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.17959, 1.00982)
 sprite_frames = SubResource("SpriteFrames_inid1")
-animation = &"Attack"
+animation = &"Wallslide"
+frame_progress = 0.161857
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.25, 2.25)
