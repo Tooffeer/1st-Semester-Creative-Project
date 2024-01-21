@@ -62,6 +62,7 @@ func _physics_process(delta):
 	
 	# Check player health
 	if playerHealth <= 0:
+		
 		die()
 	
 	stateMachine(direction)
@@ -120,7 +121,7 @@ func getGravity(jumpGravity, fallGravity):
 	else:
 		return fallGravity
 
-func attack(delta):
+func attack(_delta):
 	attack_area.monitoring = false
 	if Input.is_action_just_pressed("attack") and is_on_floor():
 		print("Attacking")
