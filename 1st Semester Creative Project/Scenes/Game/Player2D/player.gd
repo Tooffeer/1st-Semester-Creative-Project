@@ -25,21 +25,27 @@ var isWallSliding : bool
 # Health variables
 var MAXplayerHealth : float = 3
 var playerHealth : float = 0
+var isDead = false
 
 # Attack variables
 var isAttacking = false
 
+
 func _ready():
 	# Set player's health to full
 	playerHealth = MAXplayerHealth
+	isDead = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# Input direction from player
 	var direction = Input.get_axis("left", "right")
 	
-	jump(delta, direction)
-	wallSlide(delta, direction)
+	if isDead == false:
+		jump(delta, direction)
+		wallSlide(delta, direction)
+	else:
+		direction = 0
 	
 	# Get horizontal velocity
 	if direction:
@@ -57,7 +63,6 @@ func _physics_process(delta):
 	
 	# Check player health
 	if playerHealth <= 0:
-		
 		die()
 	
 	animate(direction)
@@ -119,7 +124,6 @@ func getGravity(jumpGravity, fallGravity):
 func attack(_delta):
 	attack_area.monitoring = false
 	if Input.is_action_just_pressed("attack") and is_on_floor():
-		print("Attacking")
 		isAttacking = true
 		attack_area.monitoring = true
 		await sprite.animation_finished
@@ -141,7 +145,9 @@ func animate(direction):
 		attack_area.position = Vector2(-22.564, 0.5)
 	
 	# Play animations
-	if isAttacking == true:
+	if isDead == true:
+		pass
+	elif isAttacking == true:
 		sprite.play("Attack")
 		await sprite.animation_finished
 	elif isWallSliding == true:
@@ -156,4 +162,9 @@ func animate(direction):
 		sprite.play("Idle")
 
 func die():
-	get_tree().reload_current_scene()
+	isDead = true
+	sprite.play("Die")
+	await sprite.animation_finished
+	
+	if get_tree():
+		get_tree().reload_current_scene()
