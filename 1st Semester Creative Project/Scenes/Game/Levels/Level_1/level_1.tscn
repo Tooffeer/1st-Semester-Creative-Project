@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dghevlmefbuwo"]
+[gd_scene load_steps=9 format=3 uid="uid://dghevlmefbuwo"]
 
 [ext_resource type="Texture2D" uid="uid://bfxrtabylt1cv" path="res://Assets/Level 1 Tileset.png" id="1_tsers"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/Level_1/level_1.gd" id="1_umwc2"]
+[ext_resource type="Texture2D" uid="uid://gl4f7dqxoixm" path="res://Assets/Background.png" id="2_1vagn"]
 [ext_resource type="PackedScene" uid="uid://cim2loedcchwr" path="res://Scenes/Game/Enemies/Zombie/zombie.tscn" id="3_sdciv"]
 [ext_resource type="PackedScene" uid="uid://du732r1yoe4i" path="res://Scenes/Game/Enemies/Grendel/grendel.tscn" id="4_cdhb5"]
 
@@ -138,6 +139,12 @@ size = Vector2(450.5, 88.5)
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_umwc2")
 metadata/_edit_horizontal_guides_ = [80.0, -340.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+modulate = Color(0.513726, 0.501961, 0.588235, 1)
+position = Vector2(238, -103)
+scale = Vector2(1.7125, 1.7125)
+texture = ExtResource("2_1vagn")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_to3mi")

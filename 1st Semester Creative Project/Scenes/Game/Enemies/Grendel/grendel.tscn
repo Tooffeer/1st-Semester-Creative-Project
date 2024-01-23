@@ -139,7 +139,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Charge",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -216,12 +216,15 @@ script = ExtResource("1_qiyft")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fom20")
-animation = &"Idle"
+animation = &"Charge"
+frame = 6
+frame_progress = 0.672267
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_o6eiy")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_o73tf")

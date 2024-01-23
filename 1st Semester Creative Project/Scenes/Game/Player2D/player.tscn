@@ -143,7 +143,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Attack",
-"speed": 13.0
+"speed": 14.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -269,7 +269,7 @@ shape = SubResource("RectangleShape2D_vaaau")
 scale = Vector2(1.17959, 1.00982)
 sprite_frames = SubResource("SpriteFrames_inid1")
 animation = &"Wallslide"
-frame_progress = 0.0732863
+frame_progress = 0.963115
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.25, 2.25)
