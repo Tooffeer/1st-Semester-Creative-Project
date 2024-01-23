@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://cxyrg8lhmgn0a"]
+
+[ext_resource type="Script" path="res://Scenes/Main/main.gd" id="1_ymku3"]
+[ext_resource type="PackedScene" uid="uid://dyft3mxuxayyb" path="res://Scenes/Main/Title/title.tscn" id="2_k318l"]
+
+[sub_resource type="Animation" id="Animation_yf5js"]
+resource_name = "Dissolve"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DissolveRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1.56917),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_enyco"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DissolveRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eu857"]
+_data = {
+"Dissolve": SubResource("Animation_yf5js"),
+"RESET": SubResource("Animation_enyco")
+}
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ymku3")
+
+[node name="Title" parent="." instance=ExtResource("2_k318l")]
+
+[node name="DissolveRect" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eu857")
+}
+
+[connection signal="pressed" from="Title/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Title/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+
+[editable path="Title"]

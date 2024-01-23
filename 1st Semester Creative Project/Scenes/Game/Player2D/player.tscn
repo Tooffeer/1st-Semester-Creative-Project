@@ -281,7 +281,7 @@ shape = SubResource("RectangleShape2D_vaaau")
 scale = Vector2(1.17959, 1.00982)
 sprite_frames = SubResource("SpriteFrames_inid1")
 animation = &"Wallslide"
-frame_progress = 0.607765
+frame_progress = 0.0732863
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2.25, 2.25)
@@ -290,6 +290,8 @@ drag_vertical_enabled = true
 drag_top_margin = 0.35
 
 [node name="attackArea" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]

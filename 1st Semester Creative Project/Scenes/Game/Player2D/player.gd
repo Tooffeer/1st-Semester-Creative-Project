@@ -166,5 +166,5 @@ func die():
 	sprite.play("Die")
 	await sprite.animation_finished
 	
-	if get_tree():
+	if get_tree() != null:
 		get_tree().reload_current_scene()
