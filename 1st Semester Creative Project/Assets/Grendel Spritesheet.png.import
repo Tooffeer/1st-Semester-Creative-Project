@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6f5n635phck5"
-path="res://.godot/imported/Beowulf Spritesheet.png-e95a87fa132feab374d2aae458bb8423.ctex"
+uid="uid://v7tey4x4piov"
+path="res://.godot/imported/Grendel Spritesheet.png-a1836354da3efae198ac398acb416684.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Beowulf Spritesheet.png"
-dest_files=["res://.godot/imported/Beowulf Spritesheet.png-e95a87fa132feab374d2aae458bb8423.ctex"]
+source_file="res://Assets/Grendel Spritesheet.png"
+dest_files=["res://.godot/imported/Grendel Spritesheet.png-a1836354da3efae198ac398acb416684.ctex"]
 
 [params]
 

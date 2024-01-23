@@ -1,129 +1,129 @@
-[gd_scene load_steps=38 format=3 uid="uid://b1s7r5gcfoqk4"]
+[gd_scene load_steps=36 format=3 uid="uid://b1s7r5gcfoqk4"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Player2D/player.gd" id="1_ede4o"]
-[ext_resource type="Texture2D" uid="uid://b6f5n635phck5" path="res://Assets/Beowulf Spritesheet.png" id="2_20fb3"]
+[ext_resource type="Texture2D" uid="uid://b6f5n635phck5" path="res://Assets/Beowulf/Beowulf Spritesheet.png" id="2_iprm0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaaau"]
 size = Vector2(16, 31)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vhs1"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 320, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jbhm2"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 320, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b16rh"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(96, 320, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yla0h"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(144, 320, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sf72b"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k8s5t"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bn4sg"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(96, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6sf1"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(144, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4vgnf"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(192, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8626n"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(240, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4doep"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(288, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mdphv"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(336, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_grapi"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(384, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qefvv"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(432, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6kehj"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(480, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u3b2s"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(528, 384, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ceoio"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2q1wp"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xael"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(96, 192, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0g1pk"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oanc2"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_27yr3"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(96, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2n84a"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(144, 0, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udtmp"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 128, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y6igr"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 64, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_684nv"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 64, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r314"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(96, 64, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nmwag"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(144, 64, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpkm4"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(0, 256, 48, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mkhat"]
-atlas = ExtResource("2_20fb3")
+atlas = ExtResource("2_iprm0")
 region = Rect2(48, 256, 48, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_inid1"]
@@ -257,18 +257,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncbf5"]
 size = Vector2(21.4266, 39.4989)
 
-[sub_resource type="QuadMesh" id="QuadMesh_f62wr"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7br07"]
-particle_flag_disable_z = true
-direction = Vector3(2.08165e-12, -1, 2.08165e-12)
-spread = 77.793
-flatness = 0.595
-initial_velocity_min = 36.44
-initial_velocity_max = 156.65
-gravity = Vector3(0, 98, 0)
-color = Color(0.658824, 0.0588235, 0.0588235, 1)
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ede4o")
 runSpeed = 130.0
@@ -297,22 +285,5 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
 scale = Vector2(2.09419, 0.784831)
 shape = SubResource("RectangleShape2D_ncbf5")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="attackArea/CollisionShape2D"]
-visible = false
-position = Vector2(0.20805, 0.63708)
-scale = Vector2(21.488, 39.499)
-mesh = SubResource("QuadMesh_f62wr")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
-amount = 21
-process_material = SubResource("ParticleProcessMaterial_7br07")
-lifetime = 16.23
-speed_scale = 2.92
-explosiveness = 1.0
-trail_enabled = true
-trail_lifetime = 0.23
-trail_sections = 4
 
 [connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]

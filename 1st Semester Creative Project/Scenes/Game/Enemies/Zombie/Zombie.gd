@@ -1,14 +1,21 @@
 extends CharacterBody2D
 
+# Maybe only make zombie move when first loaded on screen
+
+# Fix this mess of a code
+
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
 @onready var hitbox = $Hitbox
 @onready var gpu_particles_2d = $GPUParticles2D
-@onready var ray_cast_2d = $RayCast2D
-
+@onready var ray_cast = $RayCast2D
 
 # Signals
 signal healthChanged
+
+# Movement
+var direction = -1
+var runSpeed = 50
 
 @export var health = 3
 @export var damage = 1
@@ -20,43 +27,35 @@ var playerInRange = false
 var isAttacking = false
 var player
 
-
-var runSpeed = 50
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _ready():
-	pass
-
 func _physics_process(delta):
-	# Add the gravity.
+	# Apply gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
+	# Change direction when collding with wall
+	# Direction is stated outside of process so it isn't reset
+	if is_on_wall():
+		direction = -direction
 	
-	var direction = -1
-	if ray_cast_2d.is_colliding():
-		if direction < 0:
-			direction = 1
-	
-	if direction:
-		velocity.x = move_toward(velocity.x, direction * runSpeed, delta * 600)
-	else:
-		velocity.x = move_toward(velocity.x, 0, delta * 600)
+	# Apply velocity
+	velocity.x = direction * runSpeed
 	
 	move_and_slide()
 	
 	attack(delta)
-	animate(direction)
+	animate()
 	
+	# Blood effect
 	if health != x:
 		gpu_particles_2d.emitting = true
 		x = health
 	
 	# Check health
 	if health <= 0:
-		die()
+		queue_free()
 
 func attack(delta):
 	cooldownTimer  += delta
@@ -75,7 +74,7 @@ func _on_hitbox_body_exited(body):
 	if body.is_in_group("player"):
 		playerInRange = false
 
-func animate(direction):
+func animate():
 	# Face sprite in the direction of movement
 	if velocity.x > 0:
 		sprite.flip_h = true
@@ -84,6 +83,3 @@ func animate(direction):
 	
 	# Play animation
 	sprite.play("Run")
-
-func die():
-	queue_free()
