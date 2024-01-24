@@ -6,7 +6,7 @@ signal attack
 @onready var sprite = $AnimatedSprite2D
 
 # Health
-@onready var health = 10
+@onready var health = 20
 
 # Movement
 var direction = 0
@@ -31,8 +31,16 @@ func _physics_process(delta):
 	
 	velocity.x = chargeSpeed * direction * delta * 10
 	
-	
 	move_and_slide()
+	
+	if velocity.x > 0:
+		sprite.flip_h = true
+	elif velocity.x < 0:
+		sprite.flip_h = false
+	
+	
+	if health <= 0:
+		die()
 
 func _on_player_detection_body_entered(body):
 	if body.is_in_group("player"):
@@ -47,3 +55,8 @@ func charge():
 		direction = -1
 	elif ((position.x - player.position.x) < 0):
 		direction = 1
+
+func die():
+	sprite.play("Die")
+	await sprite.animation_finished
+	queue_free()

@@ -134,7 +134,7 @@ terrain_set_0/terrain_0/color = Color(0.823529, 0.294118, 0.282353, 1)
 sources/1 = SubResource("TileSetAtlasSource_cvt4d")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4myib"]
-size = Vector2(450.5, 88.5)
+size = Vector2(11661.6, 300.691)
 
 [node name="Level_1" type="Node2D"]
 script = ExtResource("1_umwc2")
@@ -142,7 +142,7 @@ metadata/_edit_horizontal_guides_ = [80.0, -340.0]
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.513726, 0.501961, 0.588235, 1)
-position = Vector2(238, -103)
+position = Vector2(342, 1116)
 scale = Vector2(1.7125, 1.7125)
 texture = ExtResource("2_1vagn")
 
@@ -154,7 +154,7 @@ layer_0/tile_data = PackedInt32Array(65527, 65537, 3, 131063, 65537, 1, 65528, 6
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-533, -418)
+position = Vector2(1187, 621)
 scale = Vector2(0.445422, 2.32802)
 shape = SubResource("RectangleShape2D_4myib")
 
