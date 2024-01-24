@@ -1,35 +1,30 @@
 extends CharacterBody2D
 
-signal attack
-
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
 
 # Health
-@onready var health = 20
+@export var health = 20
 
 # Movement
 var direction = 0
-const Speed = 300.0
-const chargeSpeed = 600.0
+const speed = 300.0
 
-var allowBattle = false
 var player
-
-var x = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _ready():
-	pass
 
 func _physics_process(delta):
-	# Add the gravity.
+	# Apply gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	velocity.x = chargeSpeed * direction * delta * 10
+	if direction:
+		velocity.x = speed * direction * delta * 20
+	
+	# Would add knockback here
 	
 	move_and_slide()
 	
@@ -45,7 +40,6 @@ func _physics_process(delta):
 func _on_player_detection_body_entered(body):
 	if body.is_in_group("player"):
 		player = body
-		allowBattle = true
 		
 		charge()
 
@@ -57,6 +51,7 @@ func charge():
 		direction = 1
 
 func die():
+	direction = 0
 	sprite.play("Die")
 	await sprite.animation_finished
 	queue_free()
