@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://mx8psy5d7bmg"]
+
+[ext_resource type="Script" path="res://Fireball.gd" id="1_n73in"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qph86"]
+radius = 7.07107
+
+[node name="Fireball" type="CharacterBody2D"]
+script = ExtResource("1_n73in")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qph86")

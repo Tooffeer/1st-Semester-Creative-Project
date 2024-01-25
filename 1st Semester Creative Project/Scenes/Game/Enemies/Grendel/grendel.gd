@@ -59,15 +59,19 @@ func charge():
 		direction = -1
 	elif ((position.x - player.position.x) < 0):
 		direction = 1
+	
+	sprite.play("Charge")
 
 func stunned():
 	# No longer moving
 	charging = false
 	direction = 0
+	sprite.play("Idle")
 	
 	# Stunnesd for a moment
 	stun_timer.start()
 	await stun_timer.timeout
+	
 	
 	charge()
 
