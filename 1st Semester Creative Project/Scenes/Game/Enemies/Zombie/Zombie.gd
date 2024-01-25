@@ -43,8 +43,8 @@ func _physics_process(delta):
 	# Apply velocity
 	velocity.x = direction * runSpeed
 	
-	move_and_slide()
 	
+	move_and_slide()
 	attack(delta)
 	animate()
 	

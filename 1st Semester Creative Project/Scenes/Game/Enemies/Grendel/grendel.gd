@@ -2,11 +2,12 @@ extends CharacterBody2D
 
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
+@onready var stun_timer = $StunTimer
 
 # Health
-@export var health = 20
+@export var health = 2
 
-# Movement
+# Movement 
 var direction = 0
 @export var speed = 350.0
 var charging = false
@@ -23,6 +24,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
+	# Move in the direction of movement
 	if direction:
 		velocity.x = move_toward(velocity.x, direction * speed, delta * 500)
 	else:
@@ -30,16 +32,13 @@ func _physics_process(delta):
 	
 	# Detect if bumping into wall
 	if is_on_wall() and charging:
-		var knockback= Vector2(-direction * speed, -350)
-		velocity += knockback
+		# Knockback off of wall
+		var knockback = Vector2(-direction * speed, -310)
+		velocity = knockback
 		
-		charging = false
-		direction = 0
-		
-		print(direction)
+		stunned()
 	
 	move_and_slide()
-	
 	animate()
 	
 	if health <= 0:
@@ -60,8 +59,17 @@ func charge():
 		direction = -1
 	elif ((position.x - player.position.x) < 0):
 		direction = 1
+
+func stunned():
+	# No longer moving
+	charging = false
+	direction = 0
 	
-	print("Charging")
+	# Stunnesd for a moment
+	stun_timer.start()
+	await stun_timer.timeout
+	
+	charge()
 
 func animate():
 	# Flip sprite in the direction of movement. 
