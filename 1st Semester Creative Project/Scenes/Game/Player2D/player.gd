@@ -163,6 +163,7 @@ func animate(direction):
 
 func die():
 	isDead = true
+	velocity.y = 100
 	sprite.play("Die")
 	await sprite.animation_finished
 	

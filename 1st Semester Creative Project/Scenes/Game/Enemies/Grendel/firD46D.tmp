@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://mx8psy5d7bmg"]
+[gd_scene load_steps=5 format=3 uid="uid://mx8psy5d7bmg"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Enemies/Grendel/Fireball.gd" id="1_n73in"]
 
@@ -12,12 +12,12 @@ height = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2dyt"]
 radius = 9.05539
 
-[sub_resource type="BoxMesh" id="BoxMesh_txp6e"]
-
 [node name="Fireball" type="CharacterBody2D"]
 top_level = true
 collision_layer = 0
 script = ExtResource("1_n73in")
+damage = null
+speed = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qph86")
@@ -31,10 +31,5 @@ mesh = SubResource("SphereMesh_macs1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 scale = Vector2(0.974474, 0.974421)
 shape = SubResource("CircleShape2D_v2dyt")
-
-[node name="MeshInstance2D2" type="MeshInstance2D" parent="."]
-position = Vector2(8, 0)
-scale = Vector2(18.2849, 1.36832)
-mesh = SubResource("BoxMesh_txp6e")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

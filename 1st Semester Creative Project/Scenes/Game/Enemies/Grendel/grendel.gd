@@ -17,7 +17,7 @@ var player
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+@onready var fireball = preload("res://Scenes/Game/Enemies/Grendel/fireball.tscn")
 
 func _physics_process(delta):
 	# Apply gravity.
@@ -74,6 +74,17 @@ func stunned():
 	
 	
 	charge()
+
+func launchFireball():
+	var x = fireball.instantiate()
+	var direction = (player.global_position - global_position).normalized()
+	print(rad_to_deg(direction.angle()))
+	
+	
+	x.global_position = global_position
+	x.global_rotation = direction.angle()
+	
+	add_child(x)
 
 func animate():
 	# Flip sprite in the direction of movement. 
