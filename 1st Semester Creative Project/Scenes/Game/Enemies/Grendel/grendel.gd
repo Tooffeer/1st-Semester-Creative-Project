@@ -68,8 +68,9 @@ func stunned():
 	# No longer moving
 	charging = false
 	direction = 0
-	sprite.play("Idle")
-	
+	sprite.play("Stun Fall")
+	await sprite.animation_finished
+	sprite.play("Stunned")
 	# Stunnesd for a moment
 	stun_timer.start()
 	await stun_timer.timeout
@@ -79,12 +80,12 @@ func stunned():
 	 
 func launchFireball():
 	var x = fireball.instantiate()
-	var direction = (player.global_position - global_position).normalized()
-	print(rad_to_deg(direction.angle()))
+	var f = (player.global_position - global_position).normalized()
+	print(rad_to_deg(f.angle()))
 	
 	
 	x.global_position = global_position
-	x.global_rotation = direction.angle()
+	x.global_rotation = f.angle()
 	
 	add_child(x)
 

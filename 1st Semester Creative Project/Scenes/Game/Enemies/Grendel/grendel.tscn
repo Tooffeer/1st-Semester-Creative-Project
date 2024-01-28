@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://du732r1yoe4i"]
+[gd_scene load_steps=49 format=3 uid="uid://du732r1yoe4i"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Enemies/Grendel/grendel.gd" id="1_qiyft"]
 [ext_resource type="Texture2D" uid="uid://v7tey4x4piov" path="res://Assets/Grendel Spritesheet.png" id="2_2qcgw"]
@@ -107,6 +107,74 @@ region = Rect2(128, 0, 64, 48)
 atlas = ExtResource("2_2qcgw")
 region = Rect2(192, 0, 64, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cyq7"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(0, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cp1gx"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(64, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3pi6"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(128, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mapev"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(192, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oymxa"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(256, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2o4n"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(320, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3i1dl"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(384, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gd62"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(448, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cs0g6"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(512, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_atltd"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(576, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q65ev"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(640, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_omkfh"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(704, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nyig4"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(768, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yxdg"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(832, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snstc"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(896, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7jjr"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(960, 144, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s4cj"]
+atlas = ExtResource("2_2qcgw")
+region = Rect2(1024, 144, 64, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_fom20"]
 animations = [{
 "frames": [{
@@ -201,13 +269,74 @@ animations = [{
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cyq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cp1gx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3pi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mapev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oymxa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2o4n")
+}],
+"loop": false,
+"name": &"Stun Fall",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3i1dl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gd62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cs0g6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_atltd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q65ev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_omkfh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nyig4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yxdg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snstc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7jjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8s4cj")
+}],
+"loop": true,
+"name": &"Stunned",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6eiy"]
 size = Vector2(26, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o73tf"]
-radius = 609.118
+radius = 441.0
 
 [node name="Grendel" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
@@ -217,20 +346,20 @@ speed = 290.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fom20")
-animation = &"Charge"
-frame = 6
-frame_progress = 0.672267
+animation = &"Stunned"
+autoplay = "Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_o6eiy")
 
 [node name="PlayerDetection" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection"]
 shape = SubResource("CircleShape2D_o73tf")
 
 [node name="StunTimer" type="Timer" parent="."]
-wait_time = 2.757
+wait_time = 0.85
 one_shot = true
 
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]

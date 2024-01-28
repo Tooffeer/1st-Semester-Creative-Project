@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ch6mvrimafi30"]
+
+[node name="Coin" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="CollisionShape2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/Area2D"]
