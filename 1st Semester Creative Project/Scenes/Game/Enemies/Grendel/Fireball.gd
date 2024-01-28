@@ -10,7 +10,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
 	velocity.x = speed
-	velocity = velocity.rotated(rotation)
+	#velocity = velocity.rotated(rotation)
 	
 	
 	move_and_slide()
