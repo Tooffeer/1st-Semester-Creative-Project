@@ -60,6 +60,8 @@ func charge():
 	elif ((position.x - player.position.x) < 0):
 		direction = 1
 	
+	launchFireball()
+	
 	sprite.play("Charge")
 
 func stunned():
@@ -74,7 +76,7 @@ func stunned():
 	
 	
 	charge()
-
+	 
 func launchFireball():
 	var x = fireball.instantiate()
 	var direction = (player.global_position - global_position).normalized()

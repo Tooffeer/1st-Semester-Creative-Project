@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+signal healthChanged(max, value)
+signal coinChanged(amount)
+
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
 @onready var attack_area = $attackArea
@@ -23,17 +26,22 @@ var canJump : bool = true
 var isWallSliding : bool
 
 # Health variables
-var MAXplayerHealth : float = 3
-var playerHealth : float = 0
+@export var MAXplayerHealth : float = 5
+@export var playerHealth : float = 0
+var beforeChange = playerHealth
 var isDead = false
 
 # Attack variables
 var isAttacking = false
 
+var coins = 0
+var C = coins
 
 func _ready():
 	# Set player's health to full
 	playerHealth = MAXplayerHealth
+	beforeChange = playerHealth
+	emit_signal("healthChanged", MAXplayerHealth, playerHealth)
 	isDead = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,7 +69,18 @@ func _physics_process(delta):
 	move_and_slide()
 	attack(delta)
 	
+	if coins != C:
+		emit_signal("coinChanged", coins)
+		C = coins
+	
 	# Check player health
+	if playerHealth >= MAXplayerHealth:
+		playerHealth = MAXplayerHealth
+	
+	if playerHealth != beforeChange:
+		emit_signal("healthChanged", MAXplayerHealth, playerHealth)
+		beforeChange = playerHealth
+	
 	if playerHealth <= 0:
 		die()
 	

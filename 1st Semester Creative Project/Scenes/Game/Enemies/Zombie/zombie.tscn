@@ -71,7 +71,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2bod"]
-radius = 21.6494
+radius = 18.6773
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s8rm6"]
 particle_flag_disable_z = true

@@ -230,7 +230,7 @@ shape = SubResource("RectangleShape2D_o6eiy")
 shape = SubResource("CircleShape2D_o73tf")
 
 [node name="StunTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.757
 one_shot = true
 
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]

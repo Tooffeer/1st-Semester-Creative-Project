@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://b1s7r5gcfoqk4"]
+[gd_scene load_steps=37 format=3 uid="uid://b1s7r5gcfoqk4"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Player2D/player.gd" id="1_ede4o"]
 [ext_resource type="Texture2D" uid="uid://b6f5n635phck5" path="res://Assets/Beowulf/Beowulf Spritesheet.png" id="2_iprm0"]
+[ext_resource type="PackedScene" uid="uid://cqrk4bqhxkfwk" path="res://Scenes/Game/Player2D/hud.tscn" id="3_dnrrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vaaau"]
 size = Vector2(16, 31)
@@ -260,6 +261,9 @@ size = Vector2(21.4266, 39.4989)
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ede4o")
 runSpeed = 130.0
+jumpHeight = 62.0
+jumpTimeToDescent = 0.235
+MAXplayerHealth = 6.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
@@ -286,4 +290,10 @@ monitoring = false
 scale = Vector2(2.09419, 0.784831)
 shape = SubResource("RectangleShape2D_ncbf5")
 
+[node name="HUD" parent="." instance=ExtResource("3_dnrrm")]
+
+[connection signal="coinChanged" from="." to="HUD" method="_on_player_coin_changed"]
+[connection signal="healthChanged" from="." to="HUD" method="_on_player_health_changed"]
 [connection signal="body_entered" from="attackArea" to="." method="_on_attack_area_body_entered"]
+
+[editable path="HUD"]
