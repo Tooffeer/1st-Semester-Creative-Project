@@ -18,6 +18,7 @@ radius = 9.05539
 top_level = true
 collision_layer = 0
 script = ExtResource("1_n73in")
+damage = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qph86")
