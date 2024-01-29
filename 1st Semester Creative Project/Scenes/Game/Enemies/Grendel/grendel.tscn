@@ -1,7 +1,8 @@
-[gd_scene load_steps=49 format=3 uid="uid://du732r1yoe4i"]
+[gd_scene load_steps=52 format=3 uid="uid://du732r1yoe4i"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Enemies/Grendel/grendel.gd" id="1_qiyft"]
 [ext_resource type="Texture2D" uid="uid://v7tey4x4piov" path="res://Assets/Grendel Spritesheet.png" id="2_2qcgw"]
+[ext_resource type="Texture2D" uid="uid://ccabe5siitqk6" path="res://Assets/Star.png" id="3_8jgdl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tg40y"]
 atlas = ExtResource("2_2qcgw")
@@ -335,14 +336,34 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6eiy"]
 size = Vector2(26, 48)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7vpl"]
+size = Vector2(28, 50)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_o73tf"]
 radius = 441.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wlh0e"]
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 22.075
+initial_velocity_min = 93.19
+initial_velocity_max = 93.19
+angular_velocity_min = -176.6
+angular_velocity_max = 108.68
+gravity = Vector3(0, 1, 0)
+scale_min = 0.2
+scale_max = 0.45
 
 [node name="Grendel" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_qiyft")
-speed = 290.0
+speed = 216.55
+speed2 = 308.61
+speed3 = 374.905
+stunTime = 2.89
+stunTime2 = 2.255
+stunTime3 = 1.89
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fom20")
@@ -352,6 +373,11 @@ autoplay = "Idle"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_o6eiy")
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_r7vpl")
+
 [node name="PlayerDetection" type="Area2D" parent="."]
 visible = false
 
@@ -359,7 +385,22 @@ visible = false
 shape = SubResource("CircleShape2D_o73tf")
 
 [node name="StunTimer" type="Timer" parent="."]
-wait_time = 0.85
+wait_time = 1.218
 one_shot = true
 
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_wlh0e")
+texture = ExtResource("3_8jgdl")
+lifetime = 0.42
+one_shot = true
+speed_scale = 1.25
+explosiveness = 0.07
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.551
+one_shot = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]

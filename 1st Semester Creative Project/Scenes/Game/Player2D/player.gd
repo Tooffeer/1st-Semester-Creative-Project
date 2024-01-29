@@ -6,6 +6,7 @@ signal coinChanged(amount)
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
 @onready var attack_area = $attackArea
+@onready var cooldown = $Cooldown
 
 # Running variables
 @export var runSpeed = 120.0
@@ -27,7 +28,7 @@ var isWallSliding : bool
 
 # Health variables
 @export var MAXplayerHealth : float = 5
-@export var playerHealth : float = 0
+var playerHealth : float = 0
 var beforeChange = playerHealth
 var isDead = false
 
@@ -67,7 +68,9 @@ func _physics_process(delta):
 	
 	# Move and animate plater
 	move_and_slide()
-	attack(delta)
+	
+	if cooldown.is_stopped():
+		attack(delta)
 	
 	if coins != C:
 		emit_signal("coinChanged", coins)
@@ -142,12 +145,13 @@ func getGravity(jumpGravity, fallGravity):
 
 func attack(_delta):
 	attack_area.monitoring = false
-	if Input.is_action_just_pressed("attack") and is_on_floor():
+	if Input.is_action_just_pressed("attack") and is_on_floor() and isDead == false:
 		isAttacking = true
 		attack_area.monitoring = true
 		await sprite.animation_finished
 		isAttacking = false
 		attack_area.monitoring = false
+		cooldown.start()
 
 func _on_attack_area_body_entered(body):
 	if body.is_in_group("enemy"):

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://doktrpqi7batf"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 471.0
+offset_top = 273.0
+offset_right = 1284.0
+offset_bottom = 618.0
+scale = Vector2(1.00194, 1.10193)
+text = "GRENDEL DEFEATED
+
+YOU WIN!"

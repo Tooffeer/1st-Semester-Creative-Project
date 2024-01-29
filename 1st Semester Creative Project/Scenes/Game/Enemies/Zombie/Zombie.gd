@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var sprite = $AnimatedSprite2D
 @onready var hitbox = $Hitbox
 @onready var gpu_particles_2d = $GPUParticles2D
-@onready var ray_cast = $RayCast2D
+
 
 # Signals
 signal healthChanged

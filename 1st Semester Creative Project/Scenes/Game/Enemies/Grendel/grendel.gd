@@ -3,16 +3,29 @@ extends CharacterBody2D
 # Get nodes
 @onready var sprite = $AnimatedSprite2D
 @onready var stun_timer = $StunTimer
+@onready var gpu_particles_2d = $GPUParticles2D
+@onready var cooldown = $Cooldown
+@onready var autoLoader = $"/root/Global"
 
 # Health
-@export var health = 2
+@export var totalHealth = 37
+var health = totalHealth
+var prevHealth = health
 
 # Movement 
 var direction = 0
-@export var speed = 350.0
+@export var speed = 200.0
+@export var speed2 = 300.0
+@export var speed3 = 400.0
+@export var stunTime = 4.0
+@export var stunTime2 = 3.0
+@export var stunTime3 = 2.0
+var currentSpeed = speed
 var charging = false
 var attacking = false
 
+@export var damage = 1
+var canAttack = false
 var player
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -24,22 +37,39 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
+	if health >= (totalHealth * 3/4):
+		currentSpeed = speed
+		stun_timer.wait_time = stunTime
+	elif health >= (totalHealth * 2/4):
+		currentSpeed = speed2
+		stun_timer.wait_time = stunTime2
+	elif health >= (totalHealth * 1/4):
+		currentSpeed = speed3
+		stun_timer.wait_time = stunTime3
+	
+	if health != prevHealth:
+		prevHealth = health
+		gpu_particles_2d.emitting = true
+	
 	# Move in the direction of movement
 	if direction:
-		velocity.x = move_toward(velocity.x, direction * speed, delta * 500)
+		velocity.x = move_toward(velocity.x, direction * currentSpeed, delta * 500)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, delta * 400)
 	
 	# Detect if bumping into wall
 	if is_on_wall() and charging:
 		# Knockback off of wall
-		var knockback = Vector2(-direction * speed, -310)
+		var knockback = Vector2(-direction * currentSpeed, -310)
 		velocity = knockback
 		
 		stunned()
 	
 	move_and_slide()
 	animate()
+	
+	if canAttack == true and health > 0:
+		attack()
 	
 	if health <= 0:
 		die()
@@ -60,8 +90,6 @@ func charge():
 	elif ((position.x - player.position.x) < 0):
 		direction = 1
 	
-	launchFireball()
-	
 	sprite.play("Charge")
 
 func stunned():
@@ -75,13 +103,12 @@ func stunned():
 	stun_timer.start()
 	await stun_timer.timeout
 	
-	
 	charge()
-	 
+ 
+# Not working rn
 func launchFireball():
 	var x = fireball.instantiate()
 	var f = (player.global_position - global_position).normalized()
-	print(rad_to_deg(f.angle()))
 	
 	
 	x.global_position = global_position
@@ -100,4 +127,18 @@ func die():
 	direction = 0
 	sprite.play("Die")
 	await sprite.animation_finished
+	autoLoader.emit_signal("endGame")
 	queue_free()
+
+func _on_hitbox_body_entered(body):
+	if body.is_in_group("player"):
+		canAttack = true
+
+func attack():
+	if cooldown.is_stopped() and canAttack == true:
+		player.playerHealth -= damage
+		cooldown.start()
+
+func _on_hitbox_body_exited(body):
+	if body.is_in_group("player"):
+		canAttack = false

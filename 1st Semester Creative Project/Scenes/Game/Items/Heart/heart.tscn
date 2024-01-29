@@ -1,19 +1,67 @@
-[gd_scene load_steps=5 format=3 uid="uid://idji07ri1ytf"]
+[gd_scene load_steps=13 format=3 uid="uid://idji07ri1ytf"]
 
-[ext_resource type="Texture2D" uid="uid://bf23fcub4w1fl" path="res://Assets/Heart.png" id="1_ema6w"]
 [ext_resource type="Script" path="res://Scenes/Game/Items/Heart/heart.gd" id="1_mk4vu"]
+[ext_resource type="Texture2D" uid="uid://cdcls1beeq7ny" path="res://Assets/Heart-Sheet.png" id="2_d8q0l"]
+[ext_resource type="AudioStream" uid="uid://cqt5r6aof38ow" path="res://Assets/coin-collect-retro-8-bit-sound-effect-145251.mp3" id="3_usaob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_68o4h"]
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1b660"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vnj4p"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3wdyx"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lgeh"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83j17"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyp5o"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsksx"]
+atlas = ExtResource("2_d8q0l")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2mb8q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vnj4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3wdyx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lgeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83j17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyp5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsksx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
 [node name="Heart" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_mk4vu")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ema6w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_68o4h")
@@ -22,5 +70,15 @@ shape = SubResource("CircleShape2D_68o4h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_1b660")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
+sprite_frames = SubResource("SpriteFrames_2mb8q")
+autoplay = "default"
+frame_progress = 0.591965
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_usaob")
+pitch_scale = 0.57
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

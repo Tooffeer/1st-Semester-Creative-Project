@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dghevlmefbuwo"]
+[gd_scene load_steps=12 format=3 uid="uid://dghevlmefbuwo"]
 
 [ext_resource type="Texture2D" uid="uid://bfxrtabylt1cv" path="res://Assets/Level 1 Tileset.png" id="1_tsers"]
 [ext_resource type="Script" path="res://Scenes/Game/Levels/Level_1/level_1.gd" id="1_umwc2"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://du732r1yoe4i" path="res://Scenes/Game/Enemies/Grendel/grendel.tscn" id="4_cdhb5"]
 [ext_resource type="PackedScene" uid="uid://idji07ri1ytf" path="res://Scenes/Game/Items/Heart/heart.tscn" id="6_27m6b"]
 [ext_resource type="PackedScene" uid="uid://cxnutrebmpo1o" path="res://Scenes/Game/Items/Coin/coin.tscn" id="7_vixg7"]
-[ext_resource type="PackedScene" uid="uid://doktrpqi7batf" path="res://Scenes/Game/Levels/Level_1/canvas_layer.tscn" id="8_yaxra"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvt4d"]
 texture = ExtResource("1_tsers")
@@ -185,6 +184,8 @@ position = Vector2(687, -137)
 
 [node name="Grendel" parent="Enemies" instance=ExtResource("4_cdhb5")]
 position = Vector2(1936, -104)
+totalHealth = 37
+damage = 1
 
 [node name="Zombie3" parent="Enemies" instance=ExtResource("3_sdciv")]
 position = Vector2(878, -140)
@@ -292,9 +293,6 @@ position = Vector2(1544.41, -184)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2(-0.410034, 32)
 shape = SubResource("RectangleShape2D_gbgbd")
-
-[node name="CanvasLayer" parent="." instance=ExtResource("8_yaxra")]
-visible = false
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]
