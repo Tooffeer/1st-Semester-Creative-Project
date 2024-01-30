@@ -7,6 +7,8 @@ signal coinChanged(amount)
 @onready var sprite = $AnimatedSprite2D
 @onready var attack_area = $attackArea
 @onready var cooldown = $Cooldown
+@onready var jump_sound = $JumpSound
+@onready var attack_sound = $AttackSound
 
 # Running variables
 @export var runSpeed = 120.0
@@ -113,6 +115,7 @@ func jump(delta, direction):
 	if Input.is_action_pressed("jump"):
 		if canJump:
 			velocity.y = jumpVelocity
+			jump_sound.play()
 			canJump = false
 	
 	# Jumping off of a wall
@@ -149,6 +152,7 @@ func attack(_delta):
 		isAttacking = true
 		attack_area.monitoring = true
 		await sprite.animation_finished
+		attack_sound.play()
 		isAttacking = false
 		attack_area.monitoring = false
 		cooldown.start()

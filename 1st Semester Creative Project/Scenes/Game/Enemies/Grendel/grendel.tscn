@@ -1,8 +1,9 @@
-[gd_scene load_steps=52 format=3 uid="uid://du732r1yoe4i"]
+[gd_scene load_steps=53 format=3 uid="uid://du732r1yoe4i"]
 
 [ext_resource type="Script" path="res://Scenes/Game/Enemies/Grendel/grendel.gd" id="1_qiyft"]
 [ext_resource type="Texture2D" uid="uid://v7tey4x4piov" path="res://Assets/Grendel Spritesheet.png" id="2_2qcgw"]
 [ext_resource type="Texture2D" uid="uid://ccabe5siitqk6" path="res://Assets/Star.png" id="3_8jgdl"]
+[ext_resource type="AudioStream" uid="uid://bltd1rv8f5b15" path="res://Assets/Hit damage 1.wav" id="4_mp6jo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tg40y"]
 atlas = ExtResource("2_2qcgw")
@@ -358,9 +359,9 @@ scale_max = 0.45
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_qiyft")
-speed = 216.55
-speed2 = 308.61
-speed3 = 374.905
+speed = 222.935
+speed2 = 312.565
+speed3 = 382.83
 stunTime = 2.89
 stunTime2 = 2.255
 stunTime3 = 1.89
@@ -400,6 +401,10 @@ explosiveness = 0.07
 [node name="Cooldown" type="Timer" parent="."]
 wait_time = 0.551
 one_shot = true
+
+[node name="HitWallSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_mp6jo")
+volume_db = -4.262
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

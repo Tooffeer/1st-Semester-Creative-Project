@@ -23,7 +23,7 @@ func _process(_delta):
 func _on_start_pressed():
 	animation_player.play("Dissolve")
 	await animation_player.animation_finished
-	
+	audio_stream_player_2d.stop()
 	self.add_child(gameScene)
 	
 	$Title.hide()

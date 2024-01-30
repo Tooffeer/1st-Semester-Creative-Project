@@ -6,13 +6,14 @@ extends CharacterBody2D
 @onready var gpu_particles_2d = $GPUParticles2D
 @onready var cooldown = $Cooldown
 @onready var autoLoader = $"/root/Global"
+@onready var hit_wall_sound = $HitWallSound
 
 # Health
 @export var totalHealth = 37
 var health = totalHealth
 var prevHealth = health
 
-# Movement 
+# Movement
 var direction = 0
 @export var speed = 200.0
 @export var speed2 = 300.0
@@ -62,7 +63,7 @@ func _physics_process(delta):
 		# Knockback off of wall
 		var knockback = Vector2(-direction * currentSpeed, -310)
 		velocity = knockback
-		
+		hit_wall_sound.play()
 		stunned()
 	
 	move_and_slide()
