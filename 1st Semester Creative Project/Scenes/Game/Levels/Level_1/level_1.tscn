@@ -242,7 +242,7 @@ shape = SubResource("RectangleShape2D_4myib")
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Spawner" type="Node2D" parent="Spawners"]
-position = Vector2(1344, -224)
+position = Vector2(-1163.26, -152)
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -373,7 +373,7 @@ frame_progress = 0.79064
 
 [node name="End Music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1708.79, -272)
-scale = Vector2(0.285116, 120.097)
+scale = Vector2(2.14855, 472.665)
 stream = ExtResource("10_ha6gq")
 volume_db = -9.82
 
