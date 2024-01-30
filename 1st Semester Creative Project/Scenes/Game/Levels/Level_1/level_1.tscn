@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://doktrpqi7batf" path="res://Scenes/Game/Levels/Level_1/canvas_layer.tscn" id="8_yaxra"]
 [ext_resource type="Texture2D" uid="uid://caet4nwun83bh" path="res://Assets/Boat-Sheet.png" id="9_3sfl0"]
 [ext_resource type="AudioStream" uid="uid://byphifjl52sl4" path="res://Assets/lady-of-the-80x27s-128379.mp3" id="10_70025"]
-[ext_resource type="AudioStream" uid="uid://cdcu41u8jqxc" path="res://Assets/digital-love-127441.mp3" id="10_f7lqv"]
+[ext_resource type="AudioStream" uid="uid://bc0a8pjogav6c" path="res://Assets/66 The Final Battle.mp3" id="10_ha6gq"]
 [ext_resource type="AudioStream" uid="uid://cnuouucmvlby5" path="res://Assets/retro-egyptian-theme-187380.mp3" id="10_jddvd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvt4d"]
@@ -374,8 +374,8 @@ frame_progress = 0.79064
 [node name="End Music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1708.79, -272)
 scale = Vector2(0.285116, 120.097)
-stream = ExtResource("10_f7lqv")
-volume_db = -18.345
+stream = ExtResource("10_ha6gq")
+volume_db = -9.82
 
 [node name="Battle Music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(1700.77, -208)

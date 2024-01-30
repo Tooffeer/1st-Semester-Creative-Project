@@ -6,6 +6,7 @@ extends Node2D
 @onready var canvas_layer = $CanvasLayer
 @onready var background_music = $"Background music"
 @onready var battle_music = $"Battle Music"
+@onready var end_music = $"End Music"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,4 +31,5 @@ func _on_area_2d_2_body_entered(body):
 
 func startEnding():
 	battle_music.stop()
+	end_music.play()
 	canvas_layer.show()
