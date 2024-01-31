@@ -7,6 +7,7 @@ extends Node2D
 @onready var background_music = $"Background music"
 @onready var battle_music = $"Battle Music"
 @onready var end_music = $"End Music"
+@onready var area_2d_2 = $Area2D2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +29,8 @@ func _on_area_2d_2_body_entered(body):
 		var x := [Vector2i(90, -13),Vector2i(90, -12),Vector2i(90, -11),Vector2i(90, -10), Vector2i(90, -9), Vector2i(90, -8), Vector2i(90, -7), Vector2i(90, -6)]
 		for i in x:
 			tile_map.set_cell(0, i, 1, Vector2i(2, 6))
+		
+		area_2d_2.position.y += 1000
 
 func startEnding():
 	battle_music.stop()
